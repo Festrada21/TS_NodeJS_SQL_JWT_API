@@ -58,4 +58,10 @@ y se debe de instalar nodemon en dependencia de desarrollo para mantener la ejec
 
   ----------------------------------------------------------------------------------
   instalacion de modulos principales
-  npm i express bcryptjs cors dotenv jsonwebtoken sequelize morgan helmet
+  >npm i express bcryptjs cors dotenv jsonwebtoken sequelize morgan helmet
+
+  instalar en entorno de desarrollo
+  >npm i tslint -D
+
+crear archivo de configuracion tslint
+>./node_modules/.bin/tslint --init
