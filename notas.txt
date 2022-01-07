@@ -50,7 +50,7 @@ y se debe de instalar nodemon en dependencia de desarrollo para mantener la ejec
 
 >npm i nodemon -D
  "scripts": {
-    "dev": "concurrently \"tsc -W\" \"nodemon dist/index.js\""
+    "dev": "concurrently \"tsc -W\" \"nodemon dist/app\""
   },
 
   y se ejecuta 
