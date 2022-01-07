@@ -1,0 +1,3 @@
+Instalacion de de ambiente de desarrollo para una api 
+con NodeJS, Typescript, Sequelize (sqlserver), express
+
