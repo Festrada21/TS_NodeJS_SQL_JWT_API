@@ -1,3 +1,61 @@
 Instalacion de de ambiente de desarrollo para una api 
 con NodeJS, Typescript, Sequelize (sqlserver), express
 
+
+para crear el primer archivo package.json
+>npm init -y
+
+Luego se crea la capeta "src" donde se incluira los archivos de programacion
+
+luego se instala como dependencia de desarrollo Typescript
+
+>npm i typescript -D
+
+luego se debe de inicializar
+
+>tsc --init
+para que cree el archivo tsconfig.json
+
+--configuracion del archivo tsconfig.json
+"target": "es6",
+"sourceMap": true,  "para saber donde hay error o advertencia de error"
+"outDir": "./dist", "para indicar donde se ubicarán los archivos convertidos a js"
+"strict": true, "sirve para decirle que si o si se debe de declarar datos"
+"moduleResolution": "node", "es para decirle que trabaje con los modulos de node"
+"baseUrl": "./src", "mapeamos la carpeta base"
+"esModuleInterop": true,   
+
+adicionar el "include e include"
+,
+  "include": ["src"],
+  "Exclude":["node_modules"]
+}
+
+y compilar con 
+>"TSC"
+
+y para probar 
+> node dist/index
+
+* luego en el archivo package.json se edita la seccion de scripts para que se ejecute
+la aplicacion
+
+para configurar que se ejecuten dos script al mismo tiempo se debe de instalar concurrently
+como dependencia de desarrollo
+
+>npm i concurrently -D
+
+"tsc -W" - tsc --watch
+y se debe de instalar nodemon en dependencia de desarrollo para mantener la ejecucion
+
+>npm i nodemon -D
+ "scripts": {
+    "dev": "concurrently \"tsc -W\" \"nodemon dist/index.js\""
+  },
+
+  y se ejecuta 
+  >npm run dev
+
+  ----------------------------------------------------------------------------------
+  instalacion de modulos principales
+  npm i express bcryptjs cors dotenv jsonwebtoken sequelize morgan helmet
