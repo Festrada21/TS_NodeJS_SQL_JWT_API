@@ -16,6 +16,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //TODO: se crea la clase del servidor y se debe de crear el constructor
 const express_1 = __importDefault(require("express"));
 const catalogopais_routes_1 = __importDefault(require("../routes/catalogopais_routes"));
+const auth_routes_1 = __importDefault(require("../routes/auth_routes"));
 const cors_1 = __importDefault(require("cors"));
 const connection_1 = __importDefault(require("./connection"));
 class Server {
@@ -23,6 +24,7 @@ class Server {
         //TODO configuracion del endpoint del api
         this.apiPaths = {
             catalogopais: "/api/catalogopais",
+            auth: "/api/auth",
         };
         this.app = (0, express_1.default)();
         //TODO || es el operador or
@@ -57,6 +59,7 @@ class Server {
     }
     routes() {
         this.app.use(this.apiPaths.catalogopais, catalogopais_routes_1.default);
+        this.app.use(this.apiPaths.auth, auth_routes_1.default);
     }
     //TODO: metodo para escuchar el puerto
     listen() {

@@ -2,6 +2,7 @@
 //TODO: se crea la clase del servidor y se debe de crear el constructor
 import express, { Application } from "express";
 import router from "../routes/catalogopais_routes";
+import authrouter from "../routes/auth_routes";
 import cors from "cors";
 import db from "./connection";
 
@@ -13,6 +14,7 @@ private port: string;
   //TODO configuracion del endpoint del api
 private apiPaths = {
     catalogopais: "/api/catalogopais",
+    auth: "/api/auth",
 };
 
 constructor() {
@@ -55,6 +57,7 @@ middlewares() {
 
 routes() {
     this.app.use(this.apiPaths.catalogopais, router);
+    this.app.use(this.apiPaths.auth, authrouter);
 }
   //TODO: metodo para escuchar el puerto
 listen() {
