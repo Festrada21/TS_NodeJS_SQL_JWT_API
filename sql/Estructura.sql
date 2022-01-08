@@ -53,7 +53,8 @@ DROP TABLE IF EXISTS CatalogoPais;
 CREATE TABLE CatalogoPais
 (
     PaisId INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-    Nombre VARCHAR(100) NOT NULL
+    Nombre VARCHAR(100) NOT NULL,
+    Habilitado BIT NOT NULL DEFAULT 1,
     UNIQUE(Nombre)
 );
 
@@ -66,18 +67,3 @@ CREATE TABLE DetalleFotoEmpleado
     Extension VARCHAR(100) NOT NULL,
     Ubicacion VARCHAR(100) NOT NULL    
 );
-
-USE DBARS;
---INSERCION DE DATOS
-INSERT INTO CatalogoEstadoEmpleado VALUES ('Activo');
-INSERT INTO CatalogoEstadoEmpleado VALUES ('Inactivo');
-INSERT INTO CatalogoGeneroEmpleado VALUES ('Masculino');
-INSERT INTO CatalogoGeneroEmpleado VALUES ('Femenino');
-INSERT INTO CatalogoIdentificacionEmpleado VALUES ('Cedula');
-INSERT INTO CatalogoIdentificacionEmpleado VALUES ('Pasaporte');
-INSERT INTO CatalogoIdentificacionEmpleado VALUES ('Tarjeta de Identidad');
-INSERT INTO CatalogoPais VALUES ('Guatemala');
-INSERT INTO CatalogoPais VALUES ('Honduras');
-INSERT INTO CatalogoPais VALUES ('El Salvador');
-INSERT INTO CatalogoPais VALUES ('Mexico');
-INSERT INTO Empleados VALUES ('asda123','1','123','1','111111','Francisco','Estrada','1988-08-21','2015-04-01',NULL,'1','1');

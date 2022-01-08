@@ -1,10 +1,11 @@
 //TODO: se crea la carpeta contenedora de los archivos de la base de datos
 //TODO: se crea la clase del servidor y se debe de crear el constructor
 import express, { Application } from "express";
-import userRouter from "../routes/catalogopais_routes";
+import router from "../routes/catalogopais_routes";
 import cors from "cors";
-
 import db from "./connection";
+
+
 
 class Server {
 private app: Application;
@@ -53,7 +54,7 @@ middlewares() {
 }
 
 routes() {
-    this.app.use(this.apiPaths.catalogopais, userRouter);
+    this.app.use(this.apiPaths.catalogopais, router);
 }
   //TODO: metodo para escuchar el puerto
 listen() {

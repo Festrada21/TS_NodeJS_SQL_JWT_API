@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import Pais from "../models/catalogopais";
 
+
 //TODO: crear los controladores
 export const getCatalogopaises = async (req: Request, res: Response) => {
   const pais = await Pais.findAll({

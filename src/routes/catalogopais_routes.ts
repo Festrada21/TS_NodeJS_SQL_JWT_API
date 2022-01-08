@@ -1,11 +1,5 @@
 import {Router} from 'express';
-import {
-deleteCatalogopais,
-getCatalogopais,
-getCatalogopaises,
-postCatalogopais,
-putCatalogopais,
-} from "../controllers/catalogopais_controllers";
+import { deleteCatalogopais, getCatalogopais, getCatalogopaises, postCatalogopais, putCatalogopais } from '../controllers/catalogopais_controllers';
 
 const router = Router();
 

@@ -1,6 +1,7 @@
 import { DataTypes } from "sequelize";
 import db from "../tools/connection";
 
+
 const Pais = db.define(
   "Catalogopais",
   {
