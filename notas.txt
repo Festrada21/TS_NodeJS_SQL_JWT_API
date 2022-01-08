@@ -65,3 +65,7 @@ y se debe de instalar nodemon en dependencia de desarrollo para mantener la ejec
 
 crear archivo de configuracion tslint
 >./node_modules/.bin/tslint --init
+
+  "rules": {
+        "no-console": false
+    },
