@@ -6,7 +6,7 @@ const Usuario = db.define(
   "Usuario",
   {
     usuarioId: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING,      
       primaryKey: true,
     },
     empleadoId: {
@@ -26,8 +26,7 @@ const Usuario = db.define(
         allowNull: false,
       },
       fechaEdicion: {
-        type: DataTypes.DATE,
-        allowNull: false,
+        type: DataTypes.DATE
       },
     Habilitado: {
       type: DataTypes.TINYINT,

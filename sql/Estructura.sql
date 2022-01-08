@@ -1,6 +1,7 @@
 USE master
 GO
 
+
 DROP DATABASE IF EXISTS DBARS;
 CREATE DATABASE DBARS
 GO
@@ -29,7 +30,9 @@ DROP TABLE IF EXISTS CatalogoEstadoEmpleado;
 CREATE TABLE CatalogoEstadoEmpleado
 (
     estadoId INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-    Nombre VARCHAR(100) NOT NULL
+    Nombre VARCHAR(100) NOT NULL,
+    fechaEdicion DATETIME DEFAULT GETDATE(),
+    Habilitado BIT NOT NULL DEFAULT 1,
     UNIQUE(Nombre)
 );
 
@@ -37,7 +40,9 @@ DROP TABLE IF EXISTS CatalogoGeneroEmpleado;
 CREATE TABLE CatalogoGeneroEmpleado
 (
     generoId INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-    Nombre VARCHAR(100) NOT NULL
+    Nombre VARCHAR(100) NOT NULL,
+    fechaEdicion DATETIME DEFAULT GETDATE(),
+    Habilitado BIT NOT NULL DEFAULT 1,
     UNIQUE(Nombre)
 );
 
@@ -45,7 +50,9 @@ DROP TABLE IF EXISTS CatalogoIdentificacionEmpleado;
 CREATE TABLE CatalogoIdentificacionEmpleado
 (
     IdentificacionId INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
-    Nombre VARCHAR(100) NOT NULL
+    Nombre VARCHAR(100) NOT NULL,
+    fechaEdicion DATETIME DEFAULT GETDATE(),
+    Habilitado BIT NOT NULL DEFAULT 1,
     UNIQUE(Nombre)
 );
 
@@ -54,6 +61,7 @@ CREATE TABLE CatalogoPais
 (
     PaisId INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
     Nombre VARCHAR(100) NOT NULL,
+    fechaEdicion DATETIME DEFAULT GETDATE(),
     Habilitado BIT NOT NULL DEFAULT 1,
     UNIQUE(Nombre)
 );
@@ -66,4 +74,38 @@ CREATE TABLE DetalleFotoEmpleado
     Nombre VARCHAR(100) NOT NULL,
     Extension VARCHAR(100) NOT NULL,
     Ubicacion VARCHAR(100) NOT NULL    
+);
+
+DROP TABLE IF EXISTS Usuarios;
+CREATE TABLE Usuarios
+(
+    usuarioId VARCHAR(100) DEFAULT newid() PRIMARY KEY,
+    empleadoId VARCHAR(100) NOT NULL ,
+    usuario VARCHAR(100) NOT NULL,
+    email VARCHAR(256) NOT NULL,
+    clave VARCHAR(256) NOT NULL,
+    fechaEdicion DATETIME DEFAULT GETDATE(),
+    Habilitado BIT NOT NULL DEFAULT 1,
+    UNIQUE(empleadoId,usuario)
+);
+
+DROP TABLE IF EXISTS Perfiles;
+CREATE TABLE Perfiles
+(
+    perfilId VARCHAR(100) NOT NULL DEFAULT newid() PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    fechaEdicion DATETIME DEFAULT GETDATE(),
+    Habilitado BIT NOT NULL DEFAULT 1,
+    UNIQUE(nombre)
+);
+
+DROP TABLE IF EXISTS UsuarioEnPerfiles;
+CREATE TABLE UsuarioEnPerfiles
+(
+    Id VARCHAR(100) NOT NULL DEFAULT newid() PRIMARY KEY,
+    perfilId VARCHAR(100) NOT NULL,
+    usuarioId VARCHAR(100) NOT NULL,
+    fechaEdicion DATETIME DEFAULT GETDATE(),
+    Habilitado BIT NOT NULL DEFAULT 1,
+    UNIQUE(perfilId,usuarioId)
 );

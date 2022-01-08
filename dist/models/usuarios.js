@@ -27,8 +27,7 @@ const Usuario = connection_1.default.define("Usuario", {
         allowNull: false,
     },
     fechaEdicion: {
-        type: sequelize_1.DataTypes.DATE,
-        allowNull: false,
+        type: sequelize_1.DataTypes.DATE
     },
     Habilitado: {
         type: sequelize_1.DataTypes.TINYINT,
