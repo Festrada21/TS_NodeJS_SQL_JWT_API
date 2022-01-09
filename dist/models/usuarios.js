@@ -7,7 +7,8 @@ const sequelize_1 = require("sequelize");
 const connection_1 = __importDefault(require("../tools/connection"));
 const Usuario = connection_1.default.define("Usuario", {
     usuarioId: {
-        type: sequelize_1.DataTypes.STRING,
+        type: sequelize_1.DataTypes.UUID,
+        defaultValue: sequelize_1.DataTypes.UUIDV4,
         primaryKey: true,
     },
     empleadoId: {
@@ -15,19 +16,22 @@ const Usuario = connection_1.default.define("Usuario", {
         allowNull: false,
     },
     usuario: {
-        type: sequelize_1.DataTypes.STRING,
+        type: sequelize_1.DataTypes.STRING.toString().toLowerCase(),
         allowNull: false,
     },
     email: {
-        type: sequelize_1.DataTypes.STRING,
+        type: sequelize_1.DataTypes.STRING.toString().toLowerCase(),
         allowNull: false,
+        validate: {
+            isEmail: true,
+        }
     },
-    clave: {
+    contraseña: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
     fechaEdicion: {
-        type: sequelize_1.DataTypes.DATE
+        type: sequelize_1.DataTypes.DATE,
     },
     Habilitado: {
         type: sequelize_1.DataTypes.TINYINT,

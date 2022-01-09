@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.singIn = exports.singUp = void 0;
 const usuarios_1 = __importDefault(require("../models/usuarios"));
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const singUp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { body } = req;
     try {
@@ -27,9 +28,17 @@ const singUp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 .status(400)
                 .json({ msg: `El usuario ${body.usuario} ya existe!.` });
         }
-        const usuario = yield usuarios_1.default.create(body);
+        const pkey = process.env.PORT || "aa123456,./;'[][023678999751312+_+)&*^$*#~`";
+        const usuario = yield usuarios_1.default.create({
+            empleadoId: body.empleadoId,
+            usuario: body.usuario,
+            email: body.email,
+            contraseña: body.contraseña,
+            Habilitado: 1,
+        });
+        const token = jsonwebtoken_1.default.sign({ usuario }, pkey, { expiresIn: "1h" });
         yield usuario.save();
-        res.status(201).json(usuario);
+        res.status(201).header('auth_token', token).json(usuario);
     }
     catch (err) {
         console.log(err);

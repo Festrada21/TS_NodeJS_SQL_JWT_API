@@ -83,7 +83,7 @@ CREATE TABLE Usuarios
     empleadoId VARCHAR(100) NOT NULL ,
     usuario VARCHAR(100) NOT NULL,
     email VARCHAR(256) NOT NULL,
-    clave VARCHAR(256) NOT NULL,
+    contraseña VARCHAR(256) NOT NULL,
     fechaEdicion DATETIME DEFAULT GETDATE(),
     Habilitado BIT NOT NULL DEFAULT 1,
     UNIQUE(empleadoId,usuario)

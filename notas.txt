@@ -65,3 +65,8 @@ y se debe de instalar nodemon en dependencia de desarrollo para mantener la ejec
 
 crear archivo de configuracion tslint
 >./node_modules/.bin/tslint --init
+
+instalar para generacion de guid newguid
+https://www.npmjs.com/package/uuidv4
+
+>npm install uuidv4
