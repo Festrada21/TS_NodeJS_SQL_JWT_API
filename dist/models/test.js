@@ -76,4 +76,4 @@ function validatePassword(Usuario, password) {
 exports.Usuario.beforeCreate(generateHash);
 exports.Usuario.beforeUpdate(generateHash);
 module.exports = exports.Usuario;
-//# sourceMappingURL=usuarios.js.map
+//# sourceMappingURL=test.js.map

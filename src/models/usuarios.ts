@@ -1,13 +1,14 @@
 import { DataTypes} from "sequelize";
+import bcrypt from "bcryptjs";
 import db from "../tools/connection";
 
 
-const Usuario = db.define("Usuario",
+export const Usuario = db.define('Usuario',
   {
     usuarioId: {
-      type: DataTypes.UUID, 
+      type: DataTypes.UUID.toString().toLowerCase(), 
       defaultValue: DataTypes.UUIDV4,     
-      primaryKey: true,
+      primaryKey: true      
     },
     empleadoId: {
       type: DataTypes.STRING,
@@ -36,8 +37,33 @@ const Usuario = db.define("Usuario",
       allowNull: false,
       defaultValue: 1,
     },
-  },
-  { timestamps: false }  
+  },  
+  { timestamps: false },
 );
 
-export default Usuario;
+function generateHash(Usuario: any) {
+  if (Usuario === null) {
+      throw new Error('No found user');
+  }
+  else if (!Usuario.changed('contraseña')) return Usuario.contraseña;
+  else {
+      let salt = bcrypt.genSaltSync();
+      return Usuario.contraseña = bcrypt.hashSync(Usuario.contraseña, salt);
+  }
+}
+
+async function validatePassword (Usuario: any, password: string): Promise<boolean> {
+  if (Usuario === null) {
+      throw new Error('No found user');
+  }
+  else if (!Usuario.changed('contraseña')) return Usuario.contraseña;
+  else {
+      return await bcrypt.compare(password, Usuario.contraseña);
+  }
+} 
+
+Usuario.beforeCreate(generateHash);
+
+Usuario.beforeUpdate(generateHash);
+
+module.exports = Usuario;

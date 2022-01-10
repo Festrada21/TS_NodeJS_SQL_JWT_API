@@ -12,11 +12,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Usuario = void 0;
 const sequelize_1 = require("sequelize");
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const connection_1 = __importDefault(require("../tools/connection"));
-exports.Usuario = connection_1.default.define('Usuario', {
+// module.exports = (sequelize: any, DataTypes: any) => {
+const Usuario = connection_1.default.define('Usuario', {
     usuarioId: {
         type: sequelize_1.DataTypes.UUID.toString().toLowerCase(),
         defaultValue: sequelize_1.DataTypes.UUIDV4,
@@ -61,19 +61,14 @@ function generateHash(Usuario) {
         return Usuario.contraseña = bcryptjs_1.default.hashSync(Usuario.contraseña, salt);
     }
 }
-function validatePassword(Usuario, password) {
+Usuario.prototype.validatePassword = function (contraseña) {
     return __awaiter(this, void 0, void 0, function* () {
-        if (Usuario === null) {
-            throw new Error('No found user');
-        }
-        else if (!Usuario.changed('contraseña'))
-            return Usuario.contraseña;
-        else {
-            return yield bcryptjs_1.default.compare(password, Usuario.contraseña);
-        }
+        return yield bcryptjs_1.default.compareSync(contraseña, this.contraseña);
     });
-}
-exports.Usuario.beforeCreate(generateHash);
-exports.Usuario.beforeUpdate(generateHash);
-module.exports = exports.Usuario;
-//# sourceMappingURL=usuarios.js.map
+};
+Usuario.beforeCreate(generateHash);
+Usuario.beforeUpdate(generateHash);
+module.exports = Usuario;
+//   return Usuario;
+// };
+//# sourceMappingURL=asdas.js.map
