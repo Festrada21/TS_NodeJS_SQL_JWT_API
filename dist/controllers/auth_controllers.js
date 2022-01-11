@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.singIn = exports.singUp = void 0;
+exports.profile = exports.singIn = exports.singUp = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const usuarios_1 = __importDefault(require("../models/usuarios"));
 const key = "aa123456,./;'[][023678999751312+_+)&*^$*#~`";
@@ -49,6 +49,12 @@ const singUp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.singUp = singUp;
 const singIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const userid = usuarios_1.default.findOne({
+        where: {
+            usuario: req.body.usuario,
+            habilitado: 1,
+        },
+    });
     usuarios_1.default.findOne({
         where: {
             usuario: req.body.usuario,
@@ -62,9 +68,20 @@ const singIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             return res.status(401).json({ msg: "Contraseña incorrecta" });
         }
         const pkey = secretKey || key;
-        const token = jsonwebtoken_1.default.sign({ Usuario }, pkey, { expiresIn: "1h" });
+        const userId = Usuario.usuarioId;
+        console.log(userId);
+        const token = jsonwebtoken_1.default.sign({ _id: userId }, pkey, { expiresIn: 60 * 60 * 24 });
         res.status(200).header('auth_token', token).json(Usuario);
     });
 });
 exports.singIn = singIn;
+const profile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const user = yield usuarios_1.default.findByPk(req.userid);
+    if (!user)
+        return res.status(404).json({ msg: "Usuario no encontrado" });
+    const user2 = usuarios_1.default.build({ contraseña: '0' });
+    console.log(user); // '7cfc84b8ea898bb72462e78b4643cfccd77e9f05678ec2ce78754147ba947acc'
+    res.json({ user2, user });
+});
+exports.profile = profile;
 //# sourceMappingURL=auth_controllers.js.map

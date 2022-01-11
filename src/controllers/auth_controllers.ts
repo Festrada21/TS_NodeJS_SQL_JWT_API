@@ -37,6 +37,12 @@ export const singUp = async (req: Request, res: Response) => {
 
 
 export const singIn = async (req: Request, res: Response) => {
+    const userid =    Usuario.findOne({
+        where: {
+            usuario: req.body.usuario,
+            habilitado: 1, 
+        },});
+
    Usuario.findOne({
         where: {
             usuario: req.body.usuario,
@@ -50,8 +56,19 @@ export const singIn = async (req: Request, res: Response) => {
             return res.status(401).json({ msg: "Contraseña incorrecta" });
         }
         const pkey = secretKey || key;
-        const token:string =jwt.sign({ Usuario }, pkey, { expiresIn: "1h" });  
+        const userId = Usuario.usuarioId;
+        console.log(userId);
+        const token:string =jwt.sign({_id:userId}, pkey, { expiresIn: 60*60*24 });  
         res.status(200).header('auth_token',token).json(Usuario);
     });
     
+  };
+
+  export const profile = async (req: Request, res: Response) => {
+    const user = await Usuario.findByPk(req.userid);
+   
+    if (!user) return res.status(404).json({ msg: "Usuario no encontrado" });
+    const user2 = Usuario.build({ contraseña: '0' });
+console.log(user); // '7cfc84b8ea898bb72462e78b4643cfccd77e9f05678ec2ce78754147ba947acc'
+      res.json({user2,user});
   };
