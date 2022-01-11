@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import { Usuario } from "../models/usuarios";
+import Usuario from "../models/usuarios";
 
 const key = "aa123456,./;'[][023678999751312+_+)&*^$*#~`";
 const secretKey =  process.env.KEY_SECRET;
@@ -37,13 +37,6 @@ export const singUp = async (req: Request, res: Response) => {
 
 
 export const singIn = async (req: Request, res: Response) => {
-    // Usuario.findOne({ where: { usuario: req.body.usuario } }).then(async function (Usuario) {
-    //     if (!Usuario) {
-    //         res.redirect('/login');
-    //     } else if (!await Usuario.validatePassword(password)) {
-    //         res.redirect('/login');
-    //     } 
-    // });
    Usuario.findOne({
         where: {
             usuario: req.body.usuario,

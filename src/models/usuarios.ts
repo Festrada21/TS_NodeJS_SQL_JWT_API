@@ -1,20 +1,20 @@
-import { DataTypes} from "sequelize";
+import { DataTypes } from 'sequelize';
 import bcrypt from "bcryptjs";
 import db from "../tools/connection";
 
-
-export const Usuario = db.define('Usuario',
-  {
-    usuarioId: {
-      type: DataTypes.UUID.toString().toLowerCase(), 
-      defaultValue: DataTypes.UUIDV4,     
-      primaryKey: true      
-    },
-    empleadoId: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    usuario: {
+  const Usuario = db.define(
+    "Usuario",
+    {
+      usuarioId: {
+        type: DataTypes.UUID.toString().toLowerCase(),
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true,
+      },
+      empleadoId: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      usuario: {
         type: DataTypes.STRING.toString().toLowerCase(),
         allowNull: false,
       },
@@ -23,7 +23,7 @@ export const Usuario = db.define('Usuario',
         allowNull: false,
         validate: {
           isEmail: true,
-        }
+        },
       },
       contraseña: {
         type: DataTypes.STRING,
@@ -32,16 +32,31 @@ export const Usuario = db.define('Usuario',
       fechaEdicion: {
         type: DataTypes.DATE,
       },
-    Habilitado: {
-      type: DataTypes.TINYINT,
-      allowNull: false,
-      defaultValue: 1,
+      Habilitado: {
+        type: DataTypes.TINYINT,
+        allowNull: false,
+        defaultValue: 1,
+      },
     },
-  },  
-  { timestamps: false },
-);
+    { timestamps: false,
+      
+    hooks: {
+      beforeCreate: (Usuario: any) => {
+        Usuario.contraseña = generateHash(Usuario);
+      },
+      beforeUpdate: (Usuario: any) => {
+        Usuario.contraseña = generateHash(Usuario);
+      },
+    
+    }
+   }   
+  );
 
-function generateHash(Usuario: any) {
+  Usuario.prototype.validPassword = function(password: string): boolean {
+    return bcrypt.compareSync(password, this.contraseña);
+  };
+
+  function generateHash(Usuario: any) {
   if (Usuario === null) {
       throw new Error('No found user');
   }
@@ -52,18 +67,5 @@ function generateHash(Usuario: any) {
   }
 }
 
-async function validatePassword (Usuario: any, password: string): Promise<boolean> {
-  if (Usuario === null) {
-      throw new Error('No found user');
-  }
-  else if (!Usuario.changed('contraseña')) return Usuario.contraseña;
-  else {
-      return await bcrypt.compare(password, Usuario.contraseña);
-  }
-} 
+export default Usuario;
 
-Usuario.beforeCreate(generateHash);
-
-Usuario.beforeUpdate(generateHash);
-
-module.exports = Usuario;

@@ -14,13 +14,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.singIn = exports.singUp = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const usuarios_1 = require("../models/usuarios");
+const usuarios_1 = __importDefault(require("../models/usuarios"));
 const key = "aa123456,./;'[][023678999751312+_+)&*^$*#~`";
 const secretKey = process.env.KEY_SECRET;
 const singUp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { body } = req;
     try {
-        const existe = yield usuarios_1.Usuario.findOne({
+        const existe = yield usuarios_1.default.findOne({
             where: {
                 usuario: body.usuario,
             },
@@ -31,7 +31,7 @@ const singUp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 .json({ msg: `El usuario ${body.usuario} ya existe!.` });
         }
         const pkey = secretKey || key;
-        const usuario = yield usuarios_1.Usuario.create({
+        const usuario = yield usuarios_1.default.create({
             empleadoId: body.empleadoId,
             usuario: body.usuario,
             email: body.email,
@@ -49,14 +49,7 @@ const singUp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.singUp = singUp;
 const singIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    // Usuario.findOne({ where: { usuario: req.body.usuario } }).then(async function (Usuario) {
-    //     if (!Usuario) {
-    //         res.redirect('/login');
-    //     } else if (!await Usuario.validatePassword(password)) {
-    //         res.redirect('/login');
-    //     } 
-    // });
-    usuarios_1.Usuario.findOne({
+    usuarios_1.default.findOne({
         where: {
             usuario: req.body.usuario,
             habilitado: 1,
