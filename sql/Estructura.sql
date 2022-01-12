@@ -109,3 +109,39 @@ CREATE TABLE UsuarioEnPerfiles
     Habilitado BIT NOT NULL DEFAULT 1,
     UNIQUE(perfilId,usuarioId)
 );
+
+USE DBARS;
+--Vistas
+DROP VIEW IF EXISTS vw_Empleados;
+GO
+CREATE VIEW vw_Empleados AS
+    SELECT
+        e.empleadoId,
+        e.codigoEmpleado,
+        e.nombres,
+        e.apellidos,
+        e.fechaNacimiento,
+        e.fechaAlta,
+        e.fechaBaja,
+        e.estadoId,
+        e.generoId,
+        e.paisId,
+        e.identificacionId,
+        e.numeroIdentificacion,
+        p.Nombre AS Pais,
+        i.Nombre AS Identificacion,
+        ge.Nombre AS Genero,
+        ee.Nombre AS Estado,
+        f.Nombre AS Foto,
+        u.usuario, 
+        u.email,
+        u.fechaEdicion,
+        u.Habilitado
+    FROM Empleados e
+        INNER JOIN CatalogoPais p ON e.paisId = p.PaisId
+        INNER JOIN CatalogoIdentificacionEmpleado i ON e.identificacionId = i.IdentificacionId
+        INNER JOIN CatalogoGeneroEmpleado ge ON e.generoId = ge.generoId
+        INNER JOIN CatalogoEstadoEmpleado ee ON e.estadoId = ee.estadoId
+        LEFT JOIN Usuarios u ON e.empleadoId = u.empleadoId
+        LEFT JOIN DetalleFotoEmpleado f ON e.empleadoId = f.empleadoId
+GO
