@@ -15,15 +15,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //TODO: se crea la carpeta contenedora de los archivos de la base de datos
 //TODO: se crea la clase del servidor y se debe de crear el constructor
 const express_1 = __importDefault(require("express"));
-const catalogopais_routes_1 = __importDefault(require("../routes/catalogopais_routes"));
-const auth_routes_1 = __importDefault(require("../routes/auth_routes"));
 const cors_1 = __importDefault(require("cors"));
+const auth_routes_1 = __importDefault(require("../routes/auth_routes"));
+const catalogopais_routes_1 = __importDefault(require("../routes/catalogopais_routes"));
+const CatalogoEstadoEmpleado_routes_1 = __importDefault(require("../routes/CatalogoEstadoEmpleado_routes"));
 const connection_1 = __importDefault(require("./connection"));
 class Server {
     constructor() {
         //TODO configuracion del endpoint del api
         this.apiPaths = {
-            catalogopais: "/api/catalogopais",
+            catalogopais: "/api/CP",
+            CatalogoEstadoEmpleado: "/api/CEE",
             auth: "/api/auth",
         };
         this.app = (0, express_1.default)();
@@ -59,6 +61,7 @@ class Server {
     }
     routes() {
         this.app.use(this.apiPaths.catalogopais, catalogopais_routes_1.default);
+        this.app.use(this.apiPaths.CatalogoEstadoEmpleado, CatalogoEstadoEmpleado_routes_1.default);
         this.app.use(this.apiPaths.auth, auth_routes_1.default);
     }
     //TODO: metodo para escuchar el puerto

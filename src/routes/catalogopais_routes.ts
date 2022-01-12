@@ -1,12 +1,12 @@
 import {Router} from 'express';
-import { deleteCatalogopais, getCatalogopais, getCatalogopaises, postCatalogopais, putCatalogopais } from '../controllers/catalogopais_controllers';
+import { DELETECP, GETCPS, GETCP, POSTCP, PUTCP } from '../controllers/catalogopais_controllers';
 
 const router = Router();
 
-router.get('/',getCatalogopaises);
-router.get('/:id',getCatalogopais);
-router.post('/',postCatalogopais);
-router.put('/:id',putCatalogopais);
-router.delete('/:id',deleteCatalogopais);
+router.get('/',GETCPS);
+router.get('/:id',GETCP);
+router.post('/',POSTCP);
+router.put('/:id',PUTCP);
+router.delete('/:id',DELETECP);
 
 export default router;

@@ -1,9 +1,10 @@
 //TODO: se crea la carpeta contenedora de los archivos de la base de datos
 //TODO: se crea la clase del servidor y se debe de crear el constructor
 import express, { Application } from "express";
-import router from "../routes/catalogopais_routes";
-import authrouter from "../routes/auth_routes";
 import cors from "cors";
+import authrouter from "../routes/auth_routes";
+import routercp from "../routes/catalogopais_routes";
+import routercee from "../routes/CatalogoEstadoEmpleado_routes";
 import db from "./connection";
 
 
@@ -13,7 +14,8 @@ private app: Application;
 private port: string;
   //TODO configuracion del endpoint del api
 private apiPaths = {
-    catalogopais: "/api/catalogopais",
+    catalogopais: "/api/CP",
+    CatalogoEstadoEmpleado: "/api/CEE",
     auth: "/api/auth",
 };
 
@@ -56,7 +58,8 @@ middlewares() {
 }
 
 routes() {
-    this.app.use(this.apiPaths.catalogopais, router);
+    this.app.use(this.apiPaths.catalogopais, routercp);
+    this.app.use(this.apiPaths.CatalogoEstadoEmpleado, routercee);
     this.app.use(this.apiPaths.auth, authrouter);
 }
   //TODO: metodo para escuchar el puerto

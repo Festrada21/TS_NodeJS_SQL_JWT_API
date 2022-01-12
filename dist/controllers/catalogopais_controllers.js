@@ -12,31 +12,31 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteCatalogopais = exports.putCatalogopais = exports.postCatalogopais = exports.getCatalogopais = exports.getCatalogopaises = void 0;
-const catalogopais_1 = __importDefault(require("../models/catalogopais"));
+exports.DELETECP = exports.PUTCP = exports.POSTCP = exports.GETCP = exports.GETCPS = void 0;
+const CatalogoPais_1 = __importDefault(require("../models/CatalogoPais"));
 //TODO: crear los controladores
-const getCatalogopaises = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const pais = yield catalogopais_1.default.findAll({
+const GETCPS = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const pais = yield CatalogoPais_1.default.findAll({
         where: {
             Habilitado: true,
         },
     });
-    const habilitados = yield catalogopais_1.default.count({
+    const habilitados = yield CatalogoPais_1.default.count({
         where: {
             Habilitado: true,
         },
     });
-    const deshabilitados = yield catalogopais_1.default.count({
+    const deshabilitados = yield CatalogoPais_1.default.count({
         where: {
             Habilitado: false,
         },
     });
     res.json({ pais, habilitados, deshabilitados });
 });
-exports.getCatalogopaises = getCatalogopaises;
-const getCatalogopais = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.GETCPS = GETCPS;
+const GETCP = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    const pais = yield catalogopais_1.default.findByPk(id);
+    const pais = yield CatalogoPais_1.default.findByPk(id);
     if (pais) {
         res.json(pais);
     }
@@ -44,11 +44,11 @@ const getCatalogopais = (req, res) => __awaiter(void 0, void 0, void 0, function
         return res.status(404).json({ msg: `Pais no encontrado, id ${id}` });
     }
 });
-exports.getCatalogopais = getCatalogopais;
-const postCatalogopais = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.GETCP = GETCP;
+const POSTCP = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { body } = req;
     try {
-        const existe = yield catalogopais_1.default.findOne({
+        const existe = yield CatalogoPais_1.default.findOne({
             where: {
                 Nombre: body.Nombre,
             },
@@ -58,7 +58,7 @@ const postCatalogopais = (req, res) => __awaiter(void 0, void 0, void 0, functio
                 .status(400)
                 .json({ msg: `El pais ya existe llamado ${body.Nombre}` });
         }
-        const pais = yield catalogopais_1.default.create(body);
+        const pais = yield CatalogoPais_1.default.create(body);
         yield pais.save();
         res.status(201).json(pais);
     }
@@ -67,12 +67,12 @@ const postCatalogopais = (req, res) => __awaiter(void 0, void 0, void 0, functio
         res.status(500).json({ msg: "Error al insertar" });
     }
 });
-exports.postCatalogopais = postCatalogopais;
-const putCatalogopais = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.POSTCP = POSTCP;
+const PUTCP = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     const { body } = req;
     try {
-        const pais = yield catalogopais_1.default.findByPk(id);
+        const pais = yield CatalogoPais_1.default.findByPk(id);
         if (!pais) {
             return res.status(404).json({ msg: `Pais no encontrado, id ${id}` });
         }
@@ -84,11 +84,11 @@ const putCatalogopais = (req, res) => __awaiter(void 0, void 0, void 0, function
         res.status(500).json({ msg: "Error al insertar" });
     }
 });
-exports.putCatalogopais = putCatalogopais;
+exports.PUTCP = PUTCP;
 //TODO: eliminacion fisica de un registro
-const deleteCatalogopais = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const DELETECP = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    const pais = yield catalogopais_1.default.findByPk(id);
+    const pais = yield CatalogoPais_1.default.findByPk(id);
     if (!pais) {
         return res.status(404).json({ msg: `Pais no encontrado, id ${id}` });
     }
@@ -97,5 +97,5 @@ const deleteCatalogopais = (req, res) => __awaiter(void 0, void 0, void 0, funct
     //await pais.destroy();
     res.json(pais);
 });
-exports.deleteCatalogopais = deleteCatalogopais;
+exports.DELETECP = DELETECP;
 //# sourceMappingURL=catalogopais_controllers.js.map

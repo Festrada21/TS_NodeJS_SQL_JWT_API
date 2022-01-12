@@ -64,4 +64,4 @@ function generateHash(Usuario) {
     }
 }
 exports.default = Usuario;
-//# sourceMappingURL=usuarios.js.map
+//# sourceMappingURL=Usuarios.js.map

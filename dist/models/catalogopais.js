@@ -23,4 +23,4 @@ const Pais = connection_1.default.define("Catalogopais", {
     },
 }, { timestamps: false });
 exports.default = Pais;
-//# sourceMappingURL=catalogopais.js.map
+//# sourceMappingURL=CatalogoPais.js.map

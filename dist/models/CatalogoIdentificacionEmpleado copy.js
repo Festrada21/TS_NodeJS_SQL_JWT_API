@@ -5,26 +5,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const connection_1 = __importDefault(require("../tools/connection"));
-const UsuarioEnPerfiles = connection_1.default.define("UsuarioEnPerfiles", {
-    Id: {
+const CatalogoIdentificacionEmpleado = connection_1.default.define("CatalogoIdentificacionEmpleado", {
+    IdentificacionId: {
         type: sequelize_1.DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
     },
-    perfilId: {
-        type: sequelize_1.DataTypes.STRING,
-        allowNull: false,
-        unique: true,
-    },
-    usuarioId: {
+    Nombre: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
         unique: true,
     },
     fechaEdicion: {
         type: sequelize_1.DataTypes.DATE,
-        allowNull: false,
-        unique: true,
     },
     Habilitado: {
         type: sequelize_1.DataTypes.TINYINT,
@@ -32,5 +25,5 @@ const UsuarioEnPerfiles = connection_1.default.define("UsuarioEnPerfiles", {
         defaultValue: 1,
     },
 }, { timestamps: false });
-exports.default = UsuarioEnPerfiles;
-//# sourceMappingURL=UsuarioEnPerfiles.js.map
+exports.default = CatalogoIdentificacionEmpleado;
+//# sourceMappingURL=CatalogoIdentificacionEmpleado%20copy.js.map
