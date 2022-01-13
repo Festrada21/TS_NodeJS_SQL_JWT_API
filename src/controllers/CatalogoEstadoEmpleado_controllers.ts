@@ -1,10 +1,8 @@
 import { Request, Response } from "express";
-import CatalogoEstadoEmpleado from "../models/catalogoestadoempleado";
-
-
+import CatalogoEstadoEmpleado from "../models/CatalogoEstadoEmpleado";
 
 //TODO: crear los controladores
-export const getCatalogoEstadoEmpleados = async (req: Request, res: Response) => {
+export const GETCEES = async (req: Request, res: Response) => {
   const cee = await CatalogoEstadoEmpleado.findAll({
     where: {
       Habilitado: true,
@@ -23,7 +21,7 @@ export const getCatalogoEstadoEmpleados = async (req: Request, res: Response) =>
   res.json({ cee, habilitados, deshabilitados });
 };
 
-export const getCatalogoEstadoEmpleado = async (req: Request, res: Response) => {
+export const GETCEE = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   const cee = await CatalogoEstadoEmpleado.findByPk(id);
@@ -34,7 +32,7 @@ export const getCatalogoEstadoEmpleado = async (req: Request, res: Response) => 
   }
 };
 
-export const postCatalogoEstadoEmpleado = async (req: Request, res: Response) => {
+export const POSTCEE = async (req: Request, res: Response) => {
   const { body } = req;
   try {
     const existe = await CatalogoEstadoEmpleado.findOne({
@@ -56,7 +54,7 @@ export const postCatalogoEstadoEmpleado = async (req: Request, res: Response) =>
   }
 };
 
-export const putCatalogoEstadoEmpleado = async (req: Request, res: Response) => {
+export const PUTCEE = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { body } = req;
   try {
@@ -73,7 +71,7 @@ export const putCatalogoEstadoEmpleado = async (req: Request, res: Response) => 
 };
 
 //TODO: eliminacion fisica de un registro
-export const deleteCatalogoEstadoEmpleado = async (req: Request, res: Response) => {
+export const PUTCEEH = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   const cee = await CatalogoEstadoEmpleado.findByPk(id);
@@ -81,7 +79,21 @@ export const deleteCatalogoEstadoEmpleado = async (req: Request, res: Response) 
     return res.status(404).json({ msg: `Estado Empleado no encontrado, id ${id}` });
   }
 
-  await cee.update({ Habilitado: false });
+  await cee.update({ Habilitado: 1 });
+  //TODO: eliminar el registro fisico
+  //await cee.destroy();
+
+  res.json(cee);
+};
+export const PUTCEED = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  const cee = await CatalogoEstadoEmpleado.findByPk(id);
+  if (!cee) {
+    return res.status(404).json({ msg: `Estado Empleado no encontrado, id ${id}` });
+  }
+
+  await cee.update({ Habilitado: 0 });
   //TODO: eliminar el registro fisico
   //await cee.destroy();
 

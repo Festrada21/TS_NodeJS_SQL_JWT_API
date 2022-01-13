@@ -1,12 +1,17 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
+const validateToken_1 = __importDefault(require("../libs/validateToken"));
 const CatalogoEstadoEmpleado_controllers_1 = require("../controllers/CatalogoEstadoEmpleado_controllers");
-const router = (0, express_1.Router)();
-router.get("/", CatalogoEstadoEmpleado_controllers_1.getCatalogoEstadoEmpleados);
-router.get("/:id", CatalogoEstadoEmpleado_controllers_1.getCatalogoEstadoEmpleado);
-router.post("/", CatalogoEstadoEmpleado_controllers_1.postCatalogoEstadoEmpleado);
-router.put("/:id", CatalogoEstadoEmpleado_controllers_1.putCatalogoEstadoEmpleado);
-router.delete("/:id", CatalogoEstadoEmpleado_controllers_1.deleteCatalogoEstadoEmpleado);
-exports.default = router;
+const routercee = (0, express_1.Router)();
+routercee.get("/", validateToken_1.default, CatalogoEstadoEmpleado_controllers_1.GETCEES);
+routercee.get("/:id", validateToken_1.default, CatalogoEstadoEmpleado_controllers_1.GETCEE);
+routercee.post("/", validateToken_1.default, CatalogoEstadoEmpleado_controllers_1.POSTCEE);
+routercee.put("/:id", validateToken_1.default, CatalogoEstadoEmpleado_controllers_1.PUTCEE);
+routercee.put("/D/:id", validateToken_1.default, CatalogoEstadoEmpleado_controllers_1.PUTCEED);
+routercee.put("/H/:id", validateToken_1.default, CatalogoEstadoEmpleado_controllers_1.PUTCEEH);
+exports.default = routercee;
 //# sourceMappingURL=CatalogoEstadoEmpleado_routes.js.map

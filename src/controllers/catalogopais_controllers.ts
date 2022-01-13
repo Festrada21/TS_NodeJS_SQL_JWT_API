@@ -71,8 +71,24 @@ export const PUTCP = async (req: Request, res: Response) => {
   }
 };
 
+export const PUTCPH = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    await Pais.findByPk(id).then((pais) => {
+      if (!pais) {
+        return res.status(404).json({ msg: `Pais no encontrado, id ${id}` });
+      }
+      pais.update({ Habilitado: 1 });
+      res.json(pais).status(200);
+    }); 
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ msg: "Error al habilitar" });
+  }
+};
+
 //TODO: eliminacion fisica de un registro
-export const DELETECP = async (req: Request, res: Response) => {
+export const PUTCPD= async (req: Request, res: Response) => {
   const { id } = req.params;
 
   const pais = await Pais.findByPk(id);
@@ -80,7 +96,7 @@ export const DELETECP = async (req: Request, res: Response) => {
     return res.status(404).json({ msg: `Pais no encontrado, id ${id}` });
   }
 
-  await pais.update({ Habilitado: false });
+  await pais.update({ Habilitado: 0 });
   //TODO: eliminar el registro fisico
   //await pais.destroy();
 

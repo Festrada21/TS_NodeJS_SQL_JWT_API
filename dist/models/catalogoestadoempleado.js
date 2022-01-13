@@ -26,4 +26,4 @@ const CatalogoEstadoEmpleado = connection_1.default.define("CatalogoEstadoEmplea
     },
 }, { timestamps: false });
 exports.default = CatalogoEstadoEmpleado;
-//# sourceMappingURL=catalogoestadoempleado.js.map
+//# sourceMappingURL=CatalogoEstadoEmpleado.js.map

@@ -1,12 +1,15 @@
 import {Router} from 'express';
-import { DELETECP, GETCPS, GETCP, POSTCP, PUTCP } from '../controllers/catalogopais_controllers';
+import TokenValidation from '../libs/validateToken';
+import { GETCP, GETCPS, POSTCP, PUTCP, PUTCPD, PUTCPH } from '../controllers/catalogopais_controllers';
 
-const router = Router();
 
-router.get('/',GETCPS);
-router.get('/:id',GETCP);
-router.post('/',POSTCP);
-router.put('/:id',PUTCP);
-router.delete('/:id',DELETECP);
+const routercp = Router();
 
-export default router;
+routercp.get('/',TokenValidation,GETCPS);
+routercp.get('/:id',TokenValidation,GETCP);
+routercp.post('/',TokenValidation,POSTCP);
+routercp.put('/:id',TokenValidation,PUTCP);
+routercp.put('/h/:id',TokenValidation,PUTCPH);
+routercp.put('/d/:id',TokenValidation,PUTCPD);
+
+export default routercp;

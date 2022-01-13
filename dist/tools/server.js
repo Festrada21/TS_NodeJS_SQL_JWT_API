@@ -24,7 +24,7 @@ class Server {
     constructor() {
         //TODO configuracion del endpoint del api
         this.apiPaths = {
-            catalogopais: "/api/CP",
+            catalogopais: "/api/cp",
             CatalogoEstadoEmpleado: "/api/CEE",
             auth: "/api/auth",
         };

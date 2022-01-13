@@ -12,31 +12,31 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteCatalogoEstadoEmpleado = exports.putCatalogoEstadoEmpleado = exports.postCatalogoEstadoEmpleado = exports.getCatalogoEstadoEmpleado = exports.getCatalogoEstadoEmpleados = void 0;
-const catalogoestadoempleado_1 = __importDefault(require("../models/catalogoestadoempleado"));
+exports.PUTCEED = exports.PUTCEEH = exports.PUTCEE = exports.POSTCEE = exports.GETCEE = exports.GETCEES = void 0;
+const CatalogoEstadoEmpleado_1 = __importDefault(require("../models/CatalogoEstadoEmpleado"));
 //TODO: crear los controladores
-const getCatalogoEstadoEmpleados = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const cee = yield catalogoestadoempleado_1.default.findAll({
+const GETCEES = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const cee = yield CatalogoEstadoEmpleado_1.default.findAll({
         where: {
             Habilitado: true,
         },
     });
-    const habilitados = yield catalogoestadoempleado_1.default.count({
+    const habilitados = yield CatalogoEstadoEmpleado_1.default.count({
         where: {
             Habilitado: true,
         },
     });
-    const deshabilitados = yield catalogoestadoempleado_1.default.count({
+    const deshabilitados = yield CatalogoEstadoEmpleado_1.default.count({
         where: {
             Habilitado: false,
         },
     });
     res.json({ cee, habilitados, deshabilitados });
 });
-exports.getCatalogoEstadoEmpleados = getCatalogoEstadoEmpleados;
-const getCatalogoEstadoEmpleado = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.GETCEES = GETCEES;
+const GETCEE = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    const cee = yield catalogoestadoempleado_1.default.findByPk(id);
+    const cee = yield CatalogoEstadoEmpleado_1.default.findByPk(id);
     if (cee) {
         res.json(cee);
     }
@@ -44,11 +44,11 @@ const getCatalogoEstadoEmpleado = (req, res) => __awaiter(void 0, void 0, void 0
         return res.status(404).json({ msg: `Estado Empleado no encontrado, id ${id}` });
     }
 });
-exports.getCatalogoEstadoEmpleado = getCatalogoEstadoEmpleado;
-const postCatalogoEstadoEmpleado = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.GETCEE = GETCEE;
+const POSTCEE = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { body } = req;
     try {
-        const existe = yield catalogoestadoempleado_1.default.findOne({
+        const existe = yield CatalogoEstadoEmpleado_1.default.findOne({
             where: {
                 Nombre: body.Nombre,
             },
@@ -58,7 +58,7 @@ const postCatalogoEstadoEmpleado = (req, res) => __awaiter(void 0, void 0, void 
                 .status(400)
                 .json({ msg: `El Estado Empleado ya existe llamado ${body.Nombre}` });
         }
-        const cee = yield catalogoestadoempleado_1.default.create(body);
+        const cee = yield CatalogoEstadoEmpleado_1.default.create(body);
         yield cee.save();
         res.status(201).json(cee);
     }
@@ -67,12 +67,12 @@ const postCatalogoEstadoEmpleado = (req, res) => __awaiter(void 0, void 0, void 
         res.status(500).json({ msg: "Error al insertar" });
     }
 });
-exports.postCatalogoEstadoEmpleado = postCatalogoEstadoEmpleado;
-const putCatalogoEstadoEmpleado = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.POSTCEE = POSTCEE;
+const PUTCEE = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     const { body } = req;
     try {
-        const cee = yield catalogoestadoempleado_1.default.findByPk(id);
+        const cee = yield CatalogoEstadoEmpleado_1.default.findByPk(id);
         if (!cee) {
             return res.status(404).json({ msg: `Estado Empleado no encontrado, id ${id}` });
         }
@@ -84,18 +84,30 @@ const putCatalogoEstadoEmpleado = (req, res) => __awaiter(void 0, void 0, void 0
         res.status(500).json({ msg: "Error al insertar" });
     }
 });
-exports.putCatalogoEstadoEmpleado = putCatalogoEstadoEmpleado;
+exports.PUTCEE = PUTCEE;
 //TODO: eliminacion fisica de un registro
-const deleteCatalogoEstadoEmpleado = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const PUTCEEH = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    const cee = yield catalogoestadoempleado_1.default.findByPk(id);
+    const cee = yield CatalogoEstadoEmpleado_1.default.findByPk(id);
     if (!cee) {
         return res.status(404).json({ msg: `Estado Empleado no encontrado, id ${id}` });
     }
-    yield cee.update({ Habilitado: false });
+    yield cee.update({ Habilitado: 1 });
     //TODO: eliminar el registro fisico
     //await cee.destroy();
     res.json(cee);
 });
-exports.deleteCatalogoEstadoEmpleado = deleteCatalogoEstadoEmpleado;
+exports.PUTCEEH = PUTCEEH;
+const PUTCEED = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const cee = yield CatalogoEstadoEmpleado_1.default.findByPk(id);
+    if (!cee) {
+        return res.status(404).json({ msg: `Estado Empleado no encontrado, id ${id}` });
+    }
+    yield cee.update({ Habilitado: 0 });
+    //TODO: eliminar el registro fisico
+    //await cee.destroy();
+    res.json(cee);
+});
+exports.PUTCEED = PUTCEED;
 //# sourceMappingURL=CatalogoEstadoEmpleado_controllers.js.map

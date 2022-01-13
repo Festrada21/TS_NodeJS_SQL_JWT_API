@@ -14,7 +14,7 @@ private app: Application;
 private port: string;
   //TODO configuracion del endpoint del api
 private apiPaths = {
-    catalogopais: "/api/CP",
+    catalogopais: "/api/cp",
     CatalogoEstadoEmpleado: "/api/CEE",
     auth: "/api/auth",
 };

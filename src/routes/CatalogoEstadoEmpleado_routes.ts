@@ -1,18 +1,21 @@
 import { Router } from "express";
+import TokenValidation from "../libs/validateToken";
 import {
-  deleteCatalogoEstadoEmpleado,
-  getCatalogoEstadoEmpleado,
-  getCatalogoEstadoEmpleados,
-  postCatalogoEstadoEmpleado,
-  putCatalogoEstadoEmpleado,
+  GETCEE,
+  GETCEES,
+  POSTCEE,
+  PUTCEE,
+  PUTCEED,
+  PUTCEEH,
 } from "../controllers/CatalogoEstadoEmpleado_controllers";
 
-const router = Router();
+const routercee = Router();
 
-router.get("/", getCatalogoEstadoEmpleados);
-router.get("/:id", getCatalogoEstadoEmpleado);
-router.post("/", postCatalogoEstadoEmpleado);
-router.put("/:id", putCatalogoEstadoEmpleado);
-router.delete("/:id", deleteCatalogoEstadoEmpleado);
+routercee.get("/", TokenValidation,GETCEES);
+routercee.get("/:id",TokenValidation, GETCEE);
+routercee.post("/",TokenValidation, POSTCEE);
+routercee.put("/:id",TokenValidation, PUTCEE);
+routercee.put("/D/:id",TokenValidation, PUTCEED);
+routercee.put("/H/:id",TokenValidation, PUTCEEH);
 
-export default router;
+export default routercee;

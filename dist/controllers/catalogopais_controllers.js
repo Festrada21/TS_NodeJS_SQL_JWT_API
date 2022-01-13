@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DELETECP = exports.PUTCP = exports.POSTCP = exports.GETCP = exports.GETCPS = void 0;
+exports.PUTCPD = exports.PUTCPH = exports.PUTCP = exports.POSTCP = exports.GETCP = exports.GETCPS = void 0;
 const CatalogoPais_1 = __importDefault(require("../models/CatalogoPais"));
 //TODO: crear los controladores
 const GETCPS = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -85,17 +85,34 @@ const PUTCP = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.PUTCP = PUTCP;
+const PUTCPH = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    try {
+        yield CatalogoPais_1.default.findByPk(id).then((pais) => {
+            if (!pais) {
+                return res.status(404).json({ msg: `Pais no encontrado, id ${id}` });
+            }
+            pais.update({ Habilitado: 1 });
+            res.json(pais).status(200);
+        });
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json({ msg: "Error al habilitar" });
+    }
+});
+exports.PUTCPH = PUTCPH;
 //TODO: eliminacion fisica de un registro
-const DELETECP = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const PUTCPD = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     const pais = yield CatalogoPais_1.default.findByPk(id);
     if (!pais) {
         return res.status(404).json({ msg: `Pais no encontrado, id ${id}` });
     }
-    yield pais.update({ Habilitado: false });
+    yield pais.update({ Habilitado: 0 });
     //TODO: eliminar el registro fisico
     //await pais.destroy();
     res.json(pais);
 });
-exports.DELETECP = DELETECP;
+exports.PUTCPD = PUTCPD;
 //# sourceMappingURL=catalogopais_controllers.js.map
