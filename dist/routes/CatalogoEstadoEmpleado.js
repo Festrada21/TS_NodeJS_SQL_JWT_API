@@ -14,4 +14,4 @@ routercee.put("/:id", validateToken_1.default, CatalogoEstadoEmpleado_1.PUTCEE);
 routercee.put("/D/:id", validateToken_1.default, CatalogoEstadoEmpleado_1.PUTCEED);
 routercee.put("/H/:id", validateToken_1.default, CatalogoEstadoEmpleado_1.PUTCEEH);
 exports.default = routercee;
-//# sourceMappingURL=CatalogoEstadoEmpleado_routes.js.map
+//# sourceMappingURL=CatalogoEstadoEmpleado.js.map

@@ -7,6 +7,7 @@ const vw_Empleados = db.define(
   {
     empleadoId: {
         type: DataTypes.STRING,
+        primaryKey: true
       },
       codigoEmpleado: {
       type: DataTypes.STRING,
@@ -69,7 +70,7 @@ const vw_Empleados = db.define(
         type: DataTypes.BOOLEAN,
       },
   },
-  { timestamps: false }
+  { timestamps: false, freezeTableName: true }
 );
 
 export default vw_Empleados;

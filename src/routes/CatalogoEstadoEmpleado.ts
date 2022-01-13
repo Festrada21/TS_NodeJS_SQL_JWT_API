@@ -7,7 +7,7 @@ import {
   PUTCEE,
   PUTCEED,
   PUTCEEH,
-} from "../controllers/CatalogoEstadoEmpleado_controllers";
+} from "../controllers/CatalogoEstadoEmpleado";
 
 const routercee = Router();
 

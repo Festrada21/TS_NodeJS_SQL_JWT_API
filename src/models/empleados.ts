@@ -19,7 +19,7 @@ const Empleados = db.define(
       allowNull: false,
       validate: {
         notNull: {
-          msg: 'Porfavor ingrese el codigo del empleado.'
+          msg: 'Ingrese el codigo del empleado.'
         }
       }
     },
@@ -28,7 +28,7 @@ const Empleados = db.define(
       allowNull: false,
       validate: {
         notNull: {
-          msg: 'Por favor ingrese la identificación del empleado.'
+          msg: 'Ingrese la identificación del empleado.'
         }
       }
     },
@@ -37,7 +37,7 @@ const Empleados = db.define(
       allowNull: false,
       validate: {
         notNull: {
-          msg: 'Poresa ingrese el número de identificación del empleado.'
+          msg: 'Ingrese el número de identificación del empleado.'
         }
       }
     },
@@ -46,7 +46,7 @@ const Empleados = db.define(
       allowNull: false,
       validate: {
         notNull: {
-          msg: 'Por favor ingrese los nombres del empleado.'
+          msg: 'Ingrese los nombres del empleado.'
         }
       }
     },
@@ -55,7 +55,7 @@ const Empleados = db.define(
       allowNull: false,
       validate: {
         notNull: {
-          msg: 'Posr favor ingrese los apellidos del empleado.'
+          msg: 'Ingrese los apellidos del empleado.'
         }
       }
     },
@@ -76,7 +76,8 @@ const Empleados = db.define(
       type: DataTypes.INTEGER,
     }
   },
-  { timestamps: false }
+  { timestamps: false,
+    freezeTableName: true }
 );
 
 export default Empleados;

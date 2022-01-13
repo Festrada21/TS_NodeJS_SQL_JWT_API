@@ -2,10 +2,14 @@
 //TODO: se crea la clase del servidor y se debe de crear el constructor
 import express, { Application } from "express";
 import cors from "cors";
-import authrouter from "../routes/auth_routes";
-import routercp from "../routes/catalogopais_routes";
-import routercee from "../routes/CatalogoEstadoEmpleado_routes";
+import authrouter from "../routes/Auth";
+import routercp from "../routes/CatalogoPais";
+import routercee from "../routes/CatalogoEstadoEmpleado";
+import routercge from '../routes/CatalogoGeneroEmpleado'
+import routercie from '../routes/CatalogoIdentificacionEmpleado'
+import routeremp from '../routes/Empleados'
 import db from "./connection";
+import routerEMP from "../routes/Empleados";
 
 
 
@@ -16,6 +20,9 @@ private port: string;
 private apiPaths = {
     catalogopais: "/api/cp",
     CatalogoEstadoEmpleado: "/api/CEE",
+    CatalogoGeneroEmpleado: "/api/CGE",
+    CatalogoIdentificacionEmpleado: "/api/CIE",
+    Empleados: "/api/EMP",
     auth: "/api/auth",
 };
 
@@ -60,6 +67,9 @@ middlewares() {
 routes() {
     this.app.use(this.apiPaths.catalogopais, routercp);
     this.app.use(this.apiPaths.CatalogoEstadoEmpleado, routercee);
+    this.app.use(this.apiPaths.CatalogoGeneroEmpleado, routercge);
+    this.app.use(this.apiPaths.CatalogoIdentificacionEmpleado, routercie);
+    this.app.use(this.apiPaths.Empleados, routerEMP);
     this.app.use(this.apiPaths.auth, authrouter);
 }
   //TODO: metodo para escuchar el puerto

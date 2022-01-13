@@ -14,4 +14,4 @@ routercp.put('/:id', validateToken_1.default, CatalogoPais_1.PUTCP);
 routercp.put('/h/:id', validateToken_1.default, CatalogoPais_1.PUTCPH);
 routercp.put('/d/:id', validateToken_1.default, CatalogoPais_1.PUTCPD);
 exports.default = routercp;
-//# sourceMappingURL=catalogopais_routes.js.map
+//# sourceMappingURL=CatalogoPais.js.map

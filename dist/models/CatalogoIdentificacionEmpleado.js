@@ -24,6 +24,7 @@ const CatalogoIdentificacionEmpleado = connection_1.default.define("CatalogoIden
         allowNull: false,
         defaultValue: 1,
     },
-}, { timestamps: false });
+}, { timestamps: false,
+    freezeTableName: true });
 exports.default = CatalogoIdentificacionEmpleado;
 //# sourceMappingURL=CatalogoIdentificacionEmpleado.js.map

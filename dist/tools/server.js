@@ -16,16 +16,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
 //TODO: se crea la clase del servidor y se debe de crear el constructor
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
-const auth_routes_1 = __importDefault(require("../routes/auth_routes"));
-const catalogopais_routes_1 = __importDefault(require("../routes/catalogopais_routes"));
-const CatalogoEstadoEmpleado_routes_1 = __importDefault(require("../routes/CatalogoEstadoEmpleado_routes"));
+const Auth_1 = __importDefault(require("../routes/Auth"));
+const CatalogoPais_1 = __importDefault(require("../routes/CatalogoPais"));
+const CatalogoEstadoEmpleado_1 = __importDefault(require("../routes/CatalogoEstadoEmpleado"));
+const CatalogoGeneroEmpleado_1 = __importDefault(require("../routes/CatalogoGeneroEmpleado"));
+const CatalogoIdentificacionEmpleado_1 = __importDefault(require("../routes/CatalogoIdentificacionEmpleado"));
 const connection_1 = __importDefault(require("./connection"));
+const Empleados_1 = __importDefault(require("../routes/Empleados"));
 class Server {
     constructor() {
         //TODO configuracion del endpoint del api
         this.apiPaths = {
             catalogopais: "/api/cp",
             CatalogoEstadoEmpleado: "/api/CEE",
+            CatalogoGeneroEmpleado: "/api/CGE",
+            CatalogoIdentificacionEmpleado: "/api/CIE",
+            Empleados: "/api/EMP",
             auth: "/api/auth",
         };
         this.app = (0, express_1.default)();
@@ -60,9 +66,12 @@ class Server {
         this.app.use(express_1.default.static("public"));
     }
     routes() {
-        this.app.use(this.apiPaths.catalogopais, catalogopais_routes_1.default);
-        this.app.use(this.apiPaths.CatalogoEstadoEmpleado, CatalogoEstadoEmpleado_routes_1.default);
-        this.app.use(this.apiPaths.auth, auth_routes_1.default);
+        this.app.use(this.apiPaths.catalogopais, CatalogoPais_1.default);
+        this.app.use(this.apiPaths.CatalogoEstadoEmpleado, CatalogoEstadoEmpleado_1.default);
+        this.app.use(this.apiPaths.CatalogoGeneroEmpleado, CatalogoGeneroEmpleado_1.default);
+        this.app.use(this.apiPaths.CatalogoIdentificacionEmpleado, CatalogoIdentificacionEmpleado_1.default);
+        this.app.use(this.apiPaths.Empleados, Empleados_1.default);
+        this.app.use(this.apiPaths.auth, Auth_1.default);
     }
     //TODO: metodo para escuchar el puerto
     listen() {

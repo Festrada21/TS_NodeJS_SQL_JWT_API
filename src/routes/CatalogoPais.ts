@@ -1,6 +1,6 @@
 import {Router} from 'express';
 import TokenValidation from '../libs/validateToken';
-import { GETCP, GETCPS, POSTCP, PUTCP, PUTCPD, PUTCPH } from '../controllers/catalogopais_controllers';
+import { GETCP, GETCPS, POSTCP, PUTCP, PUTCPD, PUTCPH } from '../controllers/CatalogoPais';
 
 
 const routercp = Router();

@@ -24,6 +24,6 @@ const CatalogoGeneroEmpleado = connection_1.default.define("CatalogoGeneroEmplea
         allowNull: false,
         defaultValue: 1,
     },
-}, { timestamps: false });
+}, { timestamps: false, freezeTableName: true });
 exports.default = CatalogoGeneroEmpleado;
 //# sourceMappingURL=CatalogoGeneroEmpleado.js.map

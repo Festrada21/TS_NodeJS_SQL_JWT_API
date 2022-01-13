@@ -11,4 +11,4 @@ authrouter.post('/singup', Auth_1.singUp);
 authrouter.post('/singin', Auth_1.singIn);
 authrouter.get('/profile', validateToken_1.default, Auth_1.profile);
 exports.default = authrouter;
-//# sourceMappingURL=auth_routes.js.map
+//# sourceMappingURL=Auth.js.map

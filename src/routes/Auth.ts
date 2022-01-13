@@ -1,7 +1,7 @@
 
 import {Router} from 'express';
 import TokenValidation from '../libs/validateToken';
-import { profile, singIn, singUp } from '../controllers/auth_controllers';
+import { profile, singIn, singUp } from '../controllers/Auth';
 
 
 const authrouter = Router();
