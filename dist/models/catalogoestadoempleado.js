@@ -24,6 +24,7 @@ const CatalogoEstadoEmpleado = connection_1.default.define("CatalogoEstadoEmplea
         allowNull: false,
         defaultValue: 1,
     },
-}, { timestamps: false });
+}, { timestamps: false,
+    freezeTableName: true, });
 exports.default = CatalogoEstadoEmpleado;
 //# sourceMappingURL=CatalogoEstadoEmpleado.js.map

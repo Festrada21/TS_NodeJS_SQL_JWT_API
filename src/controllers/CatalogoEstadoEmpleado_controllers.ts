@@ -50,7 +50,7 @@ export const POSTCEE = async (req: Request, res: Response) => {
     res.status(201).json(cee);
   } catch (err) {
     console.log(err);
-    res.status(500).json({ msg: "Error al insertar" });
+    res.status(500).json({ msg: "Error al insertar " + err });
   }
 };
 

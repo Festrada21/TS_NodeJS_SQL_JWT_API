@@ -24,7 +24,8 @@ const CatalogoEstadoEmpleado = db.define(
       defaultValue: 1,
     },
   },
-  { timestamps: false }
+  { timestamps: false,
+    freezeTableName: true, }
 );
 
 export default CatalogoEstadoEmpleado;
