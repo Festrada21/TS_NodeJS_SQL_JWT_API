@@ -1,0 +1,7 @@
+si no funciona y da el error de:
+Error: Please install tedious package manually
+
+ejecutar manualmente o siguiente
+
+npm uninstall tedious
+npm install tedious

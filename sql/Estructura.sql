@@ -67,6 +67,16 @@ CREATE TABLE DetalleFotoEmpleado
     Ubicacion VARCHAR(100) NOT NULL    
 );
 
+DROP TABLE IF EXISTS CatalogoRutas;
+CREATE TABLE CatalogoRutas
+(
+    IdRuta INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+    Nivel INT NOT NULL,
+    Ruta VARCHAR(100) NOT NULL,
+    Icon VARCHAR(100) NOT NULL,
+    Nombre VARCHAR(100) NOT NULL    
+);
+
 USE DBARS;
 --INSERCION DE DATOS
 INSERT INTO CatalogoEstadoEmpleado VALUES ('Activo');
@@ -81,3 +91,14 @@ INSERT INTO CatalogoPais VALUES ('Honduras');
 INSERT INTO CatalogoPais VALUES ('El Salvador');
 INSERT INTO CatalogoPais VALUES ('Mexico');
 INSERT INTO Empleados VALUES ('asda123','1','123','1','111111','Francisco','Estrada','1988-08-21','2015-04-01',NULL,'1','1');
+INSERT INTO CatalogoRutas VALUES ('1','menu1','arrow_drop_down_circle_outlined ','Menu 1');
+INSERT INTO CatalogoRutas VALUES ('2','home','folder_open','Home');
+INSERT INTO CatalogoRutas VALUES ('2','about','perm_device_information_outlined','About');
+-- INSERT INTO CatalogoRutas VALUES ('2','menu1','arrow_drop_down_circle_outlined ','Menu 1');
+-- INSERT INTO CatalogoRutas VALUES ('2','menu1','arrow_drop_down_circle_outlined ','Menu 1');
+-- INSERT INTO CatalogoRutas VALUES ('2','menu1','arrow_drop_down_circle_outlined ','Menu 1');
+-- INSERT INTO CatalogoRutas VALUES ('2','menu1','arrow_drop_down_circle_outlined ','Menu 1');
+-- INSERT INTO CatalogoRutas VALUES ('2','menu1','arrow_drop_down_circle_outlined ','Menu 1');
+-- INSERT INTO CatalogoRutas VALUES ('2','menu1','arrow_drop_down_circle_outlined ','Menu 1');
+-- INSERT INTO CatalogoRutas VALUES ('2','menu1','arrow_drop_down_circle_outlined ','Menu 1');
+-- INSERT INTO CatalogoRutas VALUES ('2','menu1','arrow_drop_down_circle_outlined ','Menu 1');
