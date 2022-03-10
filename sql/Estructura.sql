@@ -6,6 +6,7 @@ DROP DATABASE IF EXISTS DBARS;
 CREATE DATABASE DBARS
 GO
 
+
 USE DBARS;
 GO
 DROP TABLE IF EXISTS Empleados;
@@ -31,7 +32,7 @@ CREATE TABLE CatalogoEstadoEmpleado
 (
     estadoId INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
     Nombre VARCHAR(100) NOT NULL,
-    fechaEdicion DATETIME DEFAULT GETDATE(),
+    FechaEdicion DATETIME DEFAULT GETDATE(),
     Habilitado BIT NOT NULL DEFAULT 1,
     UNIQUE(Nombre)
 );
@@ -41,7 +42,7 @@ CREATE TABLE CatalogoGeneroEmpleado
 (
     generoId INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
     Nombre VARCHAR(100) NOT NULL,
-    fechaEdicion DATETIME DEFAULT GETDATE(),
+    FechaEdicion DATETIME DEFAULT GETDATE(),
     Habilitado BIT NOT NULL DEFAULT 1,
     UNIQUE(Nombre)
 );
@@ -51,7 +52,7 @@ CREATE TABLE CatalogoIdentificacionEmpleado
 (
     IdentificacionId INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
     Nombre VARCHAR(100) NOT NULL,
-    fechaEdicion DATETIME DEFAULT GETDATE(),
+    FechaEdicion DATETIME DEFAULT GETDATE(),
     Habilitado BIT NOT NULL DEFAULT 1,
     UNIQUE(Nombre)
 );
@@ -61,7 +62,7 @@ CREATE TABLE CatalogoPais
 (
     PaisId INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
     Nombre VARCHAR(100) NOT NULL,
-    fechaEdicion DATETIME DEFAULT GETDATE(),
+    FechaEdicion DATETIME DEFAULT GETDATE(),
     Habilitado BIT NOT NULL DEFAULT 1,
     UNIQUE(Nombre)
 );
@@ -84,17 +85,17 @@ CREATE TABLE Usuarios
     usuario VARCHAR(100) NOT NULL,
     email VARCHAR(256) NOT NULL,
     contraseña VARCHAR(256) NOT NULL,
-    fechaEdicion DATETIME DEFAULT GETDATE(),
+    FechaEdicion DATETIME DEFAULT GETDATE(),
     Habilitado BIT NOT NULL DEFAULT 1,
     UNIQUE(empleadoId,usuario)
 );
 
-DROP TABLE IF EXISTS Perfiles;
-CREATE TABLE Perfiles
+DROP TABLE IF EXISTS CatalogoPerfiles;
+CREATE TABLE CatalogoPerfiles
 (
     perfilId VARCHAR(100) NOT NULL DEFAULT newid() PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
-    fechaEdicion DATETIME DEFAULT GETDATE(),
+    FechaEdicion DATETIME DEFAULT GETDATE(),
     Habilitado BIT NOT NULL DEFAULT 1,
     UNIQUE(nombre)
 );
@@ -105,9 +106,20 @@ CREATE TABLE UsuarioEnPerfiles
     Id VARCHAR(100) NOT NULL DEFAULT newid() PRIMARY KEY,
     perfilId VARCHAR(100) NOT NULL,
     usuarioId VARCHAR(100) NOT NULL,
-    fechaEdicion DATETIME DEFAULT GETDATE(),
+    FechaEdicion DATETIME DEFAULT GETDATE(),
     Habilitado BIT NOT NULL DEFAULT 1,
     UNIQUE(perfilId,usuarioId)
+);
+
+DROP TABLE IF EXISTS CatalogoRutas;
+CREATE TABLE CatalogoRutas
+(
+    IdRuta INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+    perfilId VARCHAR(100) NOT NULL,
+    Nivel INT NOT NULL,
+    Ruta VARCHAR(100) NOT NULL,
+    Icon VARCHAR(100) NOT NULL,
+    Nombre VARCHAR(100) NOT NULL    
 );
 
 USE DBARS;
@@ -135,7 +147,7 @@ CREATE VIEW vw_Empleados AS
         f.Nombre AS Foto,
         u.usuario, 
         u.email,
-        u.fechaEdicion,
+        u.FechaEdicion,
         u.Habilitado
     FROM Empleados e
         INNER JOIN CatalogoPais p ON e.paisId = p.PaisId

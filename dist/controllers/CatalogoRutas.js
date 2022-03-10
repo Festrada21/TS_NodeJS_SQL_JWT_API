@@ -12,43 +12,31 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PUTEMPD = exports.PUTEMPH = exports.PUTEMP = exports.POSTEMP = exports.GETEMP = exports.GETEMPS = void 0;
-const Empleados_1 = __importDefault(require("../models/Empleados"));
+exports.PUTRUTAD = exports.PUTRUTAH = exports.PUTRUTA = exports.POSTRUTA = exports.GETRUTA = exports.GETRUTAS = void 0;
+const CatalogoRutas_1 = __importDefault(require("../models/CatalogoRutas"));
 //TODO: crear los controladores
-const GETEMPS = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const emp = yield Empleados_1.default.findAll({
-        where: {
-            Habilitado: true,
-        },
-    });
-    const habilitados = yield Empleados_1.default.count({
-        where: {
-            Habilitado: true,
-        },
-    });
-    const deshabilitados = yield Empleados_1.default.count({
-        where: {
-            Habilitado: false,
-        },
-    });
-    res.json({ emp, habilitados, deshabilitados });
+const GETRUTAS = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const ruta = yield CatalogoRutas_1.default.findAll();
+    const habilitados = yield CatalogoRutas_1.default.count();
+    const deshabilitados = yield CatalogoRutas_1.default.count();
+    res.json({ ruta, habilitados, deshabilitados });
 });
-exports.GETEMPS = GETEMPS;
-const GETEMP = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.GETRUTAS = GETRUTAS;
+const GETRUTA = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    const emp = yield Empleados_1.default.findByPk(id);
-    if (emp) {
-        res.json(emp);
+    const ruta = yield CatalogoRutas_1.default.findByPk(id);
+    if (ruta) {
+        res.json(ruta);
     }
     else {
         return res.status(404).json({ msg: `Registro no encontrado, id ${id}` });
     }
 });
-exports.GETEMP = GETEMP;
-const POSTEMP = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.GETRUTA = GETRUTA;
+const POSTRUTA = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { body } = req;
     try {
-        const existe = yield Empleados_1.default.findOne({
+        const existe = yield CatalogoRutas_1.default.findOne({
             where: {
                 Nombre: body.Nombre,
             },
@@ -58,42 +46,42 @@ const POSTEMP = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 .status(400)
                 .json({ msg: `El Registro ya existe llamado ${body.Nombre}` });
         }
-        const emp = yield Empleados_1.default.create(body);
-        yield emp.save();
-        res.status(201).json(emp);
+        const ruta = yield CatalogoRutas_1.default.create(body);
+        yield ruta.save();
+        res.status(201).json(ruta);
     }
     catch (err) {
         console.log(err);
         res.status(500).json({ msg: "Error al insertar" });
     }
 });
-exports.POSTEMP = POSTEMP;
-const PUTEMP = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.POSTRUTA = POSTRUTA;
+const PUTRUTA = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     const { body } = req;
     try {
-        const emp = yield Empleados_1.default.findByPk(id);
-        if (!emp) {
+        const ruta = yield CatalogoRutas_1.default.findByPk(id);
+        if (!ruta) {
             return res.status(404).json({ msg: `Registro no encontrado, id ${id}` });
         }
-        yield emp.update(body);
-        res.json(emp).status(200);
+        yield ruta.update(body);
+        res.json(ruta).status(200);
     }
     catch (err) {
         console.log(err);
         res.status(500).json({ msg: "Error al insertar" });
     }
 });
-exports.PUTEMP = PUTEMP;
-const PUTEMPH = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.PUTRUTA = PUTRUTA;
+const PUTRUTAH = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     try {
-        yield Empleados_1.default.findByPk(id).then((emp) => {
-            if (!emp) {
+        yield CatalogoRutas_1.default.findByPk(id).then((ruta) => {
+            if (!ruta) {
                 return res.status(404).json({ msg: `Registro no encontrado, id ${id}` });
             }
-            emp.update({ Habilitado: 1 });
-            res.json(emp).status(200);
+            ruta.update({ Habilitado: 1 });
+            res.json(ruta).status(200);
         });
     }
     catch (err) {
@@ -101,18 +89,18 @@ const PUTEMPH = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.status(500).json({ msg: "Error al habilitar" });
     }
 });
-exports.PUTEMPH = PUTEMPH;
+exports.PUTRUTAH = PUTRUTAH;
 //TODO: eliminacion fisica de un registro
-const PUTEMPD = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const PUTRUTAD = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    const emp = yield Empleados_1.default.findByPk(id);
-    if (!emp) {
+    const ruta = yield CatalogoRutas_1.default.findByPk(id);
+    if (!ruta) {
         return res.status(404).json({ msg: `Registro no encontrado, id ${id}` });
     }
-    yield emp.update({ Habilitado: 0 });
+    yield ruta.update({ Habilitado: 0 });
     //TODO: eliminar el registro fisico
-    //await emp.destroy();
-    res.json(emp);
+    //await ruta.destroy();
+    res.json(ruta);
 });
-exports.PUTEMPD = PUTEMPD;
-//# sourceMappingURL=CatalogoIdentificacionEmpleado%20copy.js.map
+exports.PUTRUTAD = PUTRUTAD;
+//# sourceMappingURL=CatalogoRutas.js.map

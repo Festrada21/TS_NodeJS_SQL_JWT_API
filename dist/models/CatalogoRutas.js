@@ -5,25 +5,32 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const connection_1 = __importDefault(require("../tools/connection"));
-const CatalogoIdentificacionEmpleado = connection_1.default.define("CatalogoIdentificacionEmpleado", {
-    IdentificacionId: {
+const CatalogoRutas = connection_1.default.define("CatalogoRutas", {
+    IdRuta: {
         type: sequelize_1.DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
     },
+    perfilId: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+    },
+    Nivel: {
+        type: sequelize_1.DataTypes.INTEGER,
+        allowNull: false,
+    },
+    Ruta: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+    },
+    Icon: {
+        type: sequelize_1.DataTypes.STRING,
+        allowNull: false,
+    },
     Nombre: {
         type: sequelize_1.DataTypes.STRING,
         allowNull: false,
-        unique: true,
-    },
-    fechaEdicion: {
-        type: sequelize_1.DataTypes.DATE,
-    },
-    Habilitado: {
-        type: sequelize_1.DataTypes.TINYINT,
-        allowNull: false,
-        defaultValue: 1,
     },
 }, { timestamps: false });
-exports.default = CatalogoIdentificacionEmpleado;
-//# sourceMappingURL=CatalogoIdentificacionEmpleado%20copy.js.map
+exports.default = CatalogoRutas;
+//# sourceMappingURL=CatalogoRutas.js.map

@@ -14,13 +14,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.profile = exports.singIn = exports.singUp = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const Usuarios_1 = __importDefault(require("../models/Usuarios"));
+const usuarios_1 = __importDefault(require("../models/usuarios"));
 const key = "aa123456,./;'[][023678999751312+_+)&*^$*#~`";
 const secretKey = process.env.KEY_SECRET;
 const singUp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { body } = req;
     try {
-        const existe = yield Usuarios_1.default.findOne({
+        const existe = yield usuarios_1.default.findOne({
             where: {
                 usuario: body.usuario,
             },
@@ -31,7 +31,7 @@ const singUp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 .json({ msg: `El usuario ${body.usuario} ya existe!.` });
         }
         const pkey = secretKey || key;
-        const usuario = yield Usuarios_1.default.create({
+        const usuario = yield usuarios_1.default.create({
             empleadoId: body.empleadoId,
             usuario: body.usuario,
             email: body.email,
@@ -49,13 +49,13 @@ const singUp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.singUp = singUp;
 const singIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const userid = Usuarios_1.default.findOne({
+    const userid = usuarios_1.default.findOne({
         where: {
             usuario: req.body.usuario,
             habilitado: 1,
         },
     });
-    Usuarios_1.default.findOne({
+    usuarios_1.default.findOne({
         where: {
             usuario: req.body.usuario,
             habilitado: 1,
@@ -76,10 +76,10 @@ const singIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.singIn = singIn;
 const profile = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const user = yield Usuarios_1.default.findByPk(req.userid);
+    const user = yield usuarios_1.default.findByPk(req.userid);
     if (!user)
         return res.status(404).json({ msg: "Usuario no encontrado" });
-    const user2 = Usuarios_1.default.build({ contraseña: '0' });
+    const user2 = usuarios_1.default.build({ contraseña: '0' });
     console.log(user); // '7cfc84b8ea898bb72462e78b4643cfccd77e9f05678ec2ce78754147ba947acc'
     res.json({ user2, user });
 });

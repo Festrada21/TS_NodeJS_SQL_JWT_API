@@ -7,7 +7,7 @@ import routercp from "../routes/CatalogoPais";
 import routercee from "../routes/CatalogoEstadoEmpleado";
 import routercge from '../routes/CatalogoGeneroEmpleado'
 import routercie from '../routes/CatalogoIdentificacionEmpleado'
-import routeremp from '../routes/Empleados'
+import routerrutas from '../routes/CatalogoRutas'
 import db from "./connection";
 import routerEMP from "../routes/Empleados";
 
@@ -22,6 +22,7 @@ private apiPaths = {
     CatalogoEstadoEmpleado: "/api/CEE",
     CatalogoGeneroEmpleado: "/api/CGE",
     CatalogoIdentificacionEmpleado: "/api/CIE",
+    CatalogoRutas: "/api/rutas",
     Empleados: "/api/EMP",
     auth: "/api/auth",
 };
@@ -69,6 +70,7 @@ routes() {
     this.app.use(this.apiPaths.CatalogoEstadoEmpleado, routercee);
     this.app.use(this.apiPaths.CatalogoGeneroEmpleado, routercge);
     this.app.use(this.apiPaths.CatalogoIdentificacionEmpleado, routercie);
+    this.app.use(this.apiPaths.CatalogoRutas, routerrutas);
     this.app.use(this.apiPaths.Empleados, routerEMP);
     this.app.use(this.apiPaths.auth, authrouter);
 }

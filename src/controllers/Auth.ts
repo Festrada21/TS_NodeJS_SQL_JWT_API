@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import Usuario from "../models/Usuarios";
+import Usuario from "../models/usuarios";
+
 
 const key = "aa123456,./;'[][023678999751312+_+)&*^$*#~`";
 const secretKey =  process.env.KEY_SECRET;

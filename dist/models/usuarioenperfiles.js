@@ -33,4 +33,4 @@ const UsuarioEnPerfiles = connection_1.default.define("UsuarioEnPerfiles", {
     },
 }, { timestamps: false });
 exports.default = UsuarioEnPerfiles;
-//# sourceMappingURL=UsuarioEnPerfiles.js.map
+//# sourceMappingURL=usuarioenperfiles.js.map

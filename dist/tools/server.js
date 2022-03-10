@@ -21,6 +21,7 @@ const CatalogoPais_1 = __importDefault(require("../routes/CatalogoPais"));
 const CatalogoEstadoEmpleado_1 = __importDefault(require("../routes/CatalogoEstadoEmpleado"));
 const CatalogoGeneroEmpleado_1 = __importDefault(require("../routes/CatalogoGeneroEmpleado"));
 const CatalogoIdentificacionEmpleado_1 = __importDefault(require("../routes/CatalogoIdentificacionEmpleado"));
+const CatalogoRutas_1 = __importDefault(require("../routes/CatalogoRutas"));
 const connection_1 = __importDefault(require("./connection"));
 const Empleados_1 = __importDefault(require("../routes/Empleados"));
 class Server {
@@ -31,6 +32,7 @@ class Server {
             CatalogoEstadoEmpleado: "/api/CEE",
             CatalogoGeneroEmpleado: "/api/CGE",
             CatalogoIdentificacionEmpleado: "/api/CIE",
+            CatalogoRutas: "/api/rutas",
             Empleados: "/api/EMP",
             auth: "/api/auth",
         };
@@ -70,6 +72,7 @@ class Server {
         this.app.use(this.apiPaths.CatalogoEstadoEmpleado, CatalogoEstadoEmpleado_1.default);
         this.app.use(this.apiPaths.CatalogoGeneroEmpleado, CatalogoGeneroEmpleado_1.default);
         this.app.use(this.apiPaths.CatalogoIdentificacionEmpleado, CatalogoIdentificacionEmpleado_1.default);
+        this.app.use(this.apiPaths.CatalogoRutas, CatalogoRutas_1.default);
         this.app.use(this.apiPaths.Empleados, Empleados_1.default);
         this.app.use(this.apiPaths.auth, Auth_1.default);
     }
